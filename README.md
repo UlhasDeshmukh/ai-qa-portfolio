@@ -4,14 +4,14 @@ Hands-on projects built while transitioning from QA/test-automation into AI eval
 
 ## Projects
 
-| Project | What it tests | Builds on |
-|---|---|---|
-| [`projects/p1-rag-testing`](projects/p1-rag-testing) | RAG chatbot: retrieval precision/recall, faithfulness, groundedness, hallucination checks | RAG Architecture & Testing |
-| [`projects/p2-llm-judge`](projects/p2-llm-judge) | LLM-as-a-Judge pipeline, human vs. LLM grading on a golden dataset | AI Evaluation Metrics |
-| [`projects/p3-agent-pyramid`](projects/p3-agent-pyramid) | Tool-using agent tested at all 4 layers of the AI-Native Test Pyramid | Agentic Workflows & Tool-Use Testing |
-| [`projects/p4-redteam`](projects/p4-redteam) | Prompt regression + red-teaming/guardrail test suite | Prompt Testing / AI Safety & Red Teaming |
-| [`projects/p5-framework`](projects/p5-framework) | Full DeepEval-based test framework, data-driven, CI/CD, HTML reports | DeepEval / Framework Design & CI/CD |
-| [`docs/`](docs) | Capstone: Test Strategy documents (chatbot + AI agent) | Everything above |
+| Project | What it tests | Builds on | Primary tool(s) |
+|---|---|---|---|
+| [`projects/p1-rag-testing`](projects/p1-rag-testing) | RAG chatbot: retrieval precision/recall, faithfulness, groundedness, hallucination checks | RAG Architecture & Testing | LangChain + DeepEval |
+| [`projects/p2-llm-judge`](projects/p2-llm-judge) | LLM-as-a-Judge pipeline, human vs. LLM grading on a golden dataset | AI Evaluation Metrics | DeepEval / custom rubric |
+| [`projects/p3-agent-pyramid`](projects/p3-agent-pyramid) | Tool-using agent tested at all 4 layers of the AI-Native Test Pyramid | Agentic Workflows & Tool-Use Testing | Custom agent + pytest |
+| [`projects/p4-redteam`](projects/p4-redteam) | Prompt regression + red-teaming/guardrail test suite, mapped to OWASP LLM Top 10 | Prompt Testing / AI Safety & Red Teaming | PromptFoo |
+| [`projects/p5-framework`](projects/p5-framework) | Full DeepEval-based test framework, data-driven, CI/CD, HTML reports | DeepEval / Framework Design & CI/CD | DeepEval + GitHub Actions |
+| [`docs/`](docs) | Capstone: Test Strategy documents (chatbot + AI agent) | Everything above | — |
 
 ## Structure
 

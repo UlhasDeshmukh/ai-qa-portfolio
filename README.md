@@ -1,87 +1,32 @@
 # AI-QA Portfolio
 
-A comprehensive portfolio showcasing AI and quality assurance expertise through practical projects, implementations, and demonstrations.
-
-## Overview
-
-This repository serves as a portfolio of AI-driven QA solutions, testing frameworks, and automation projects. It demonstrates proficiency in building intelligent testing systems, implementing QA best practices, and leveraging AI/ML techniques for quality assurance.
-
-## Tech Stack
-
-- **Python**: Core AI/ML implementations, test automation, and backend services
-- **TypeScript**: Frontend applications, testing utilities, and type-safe tooling
-- **Additional Technologies**: (To be added as projects are developed)
+Hands-on projects built while transitioning from QA/test-automation into AI evaluation engineering. Each project maps to a module in my [AI-QA Field Manual](../AI-QA/AI-QA-Master-Study-Plan.md) study plan and builds toward being able to write a real **Test Strategy** for a chatbot or an AI agent product.
 
 ## Projects
 
-Projects and implementations will be organized within this repository. Each project includes:
-- Source code
-- Documentation
-- Test cases
-- Usage examples
+| Project | What it tests | Builds on |
+|---|---|---|
+| [`projects/p1-rag-testing`](projects/p1-rag-testing) | RAG chatbot: retrieval precision/recall, faithfulness, groundedness, hallucination checks | RAG Architecture & Testing |
+| [`projects/p2-llm-judge`](projects/p2-llm-judge) | LLM-as-a-Judge pipeline, human vs. LLM grading on a golden dataset | AI Evaluation Metrics |
+| [`projects/p3-agent-pyramid`](projects/p3-agent-pyramid) | Tool-using agent tested at all 4 layers of the AI-Native Test Pyramid | Agentic Workflows & Tool-Use Testing |
+| [`projects/p4-redteam`](projects/p4-redteam) | Prompt regression + red-teaming/guardrail test suite | Prompt Testing / AI Safety & Red Teaming |
+| [`projects/p5-framework`](projects/p5-framework) | Full DeepEval-based test framework, data-driven, CI/CD, HTML reports | DeepEval / Framework Design & CI/CD |
+| [`docs/`](docs) | Capstone: Test Strategy documents (chatbot + AI agent) | Everything above |
 
-## Features
-
-- AI-powered QA automation
-- Testing frameworks and utilities
-- Performance analysis and optimization
-- Quality metrics and reporting
-- Demonstration of best practices
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.8+
-- Node.js 16+
-- npm or yarn
-
-### Installation
-
-```bash
-# Clone the repository
-git clone <repository-url>
-cd ai-qa-portfolio
-
-# Install Python dependencies (when available)
-pip install -r requirements.txt
-
-# Install TypeScript/Node dependencies (when available)
-npm install
-```
-
-### Usage
-
-Instructions for running projects will be added as they are developed.
-
-## Project Structure
+## Structure
 
 ```
 ai-qa-portfolio/
-├── python/              # Python-based projects and utilities
-├── typescript/          # TypeScript/Node.js projects
-├── tests/              # Test suites and examples
-├── docs/               # Documentation
-└── README.md
+├── datasets/       golden datasets (jsonl) shared across projects
+├── metrics/        custom evaluation metric implementations
+├── tests/          data-driven test suites
+├── utils/          shared helpers: judge-model wrapper, RAG chain wrapper, config
+├── reports/         generated HTML evaluation reports
+├── projects/       one folder per portfolio project (P1-P5)
+├── docs/           write-ups, including the final Test Strategy documents
+└── .github/workflows/   CI pipeline (added in the framework-design phase)
 ```
 
-## Development
+## Status
 
-To contribute or extend this portfolio:
-
-1. Create a feature branch
-2. Implement your changes
-3. Add appropriate tests and documentation
-4. Submit a pull request
-
-## Documentation
-
-Detailed documentation for each project will be maintained in respective project directories.
-
-## License
-
-This project is open source and available under the MIT License.
-
-## Contact
-
-For inquiries or collaboration opportunities, please reach out.
+Scaffolding only — projects are filled in as each corresponding study module is completed. See the module map in the Field Manual for hours/pacing.

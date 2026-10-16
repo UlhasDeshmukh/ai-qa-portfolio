@@ -11,6 +11,7 @@ Hands-on projects built while transitioning from QA/test-automation into AI eval
 | [`projects/p3-agent-pyramid`](projects/p3-agent-pyramid) | Tool-using agent tested at all 4 layers of the AI-Native Test Pyramid | Agentic Workflows & Tool-Use Testing | Custom agent + pytest |
 | [`projects/p4-redteam`](projects/p4-redteam) | Prompt regression + red-teaming/guardrail test suite, mapped to OWASP LLM Top 10 | Prompt Testing / AI Safety & Red Teaming | PromptFoo |
 | [`projects/p5-framework`](projects/p5-framework) | Full DeepEval-based test framework, data-driven, CI/CD, HTML reports | DeepEval / Framework Design & CI/CD | DeepEval + GitHub Actions |
+| [`projects/p6-reliability`](projects/p6-reliability) | Canary rollout + rollback plan, load-test findings (prompt-uniformity trap) | Production Reliability & Release Engineering | Toy load test + rollout-runbook doc |
 | [`docs/`](docs) | Capstone: Test Strategy documents (chatbot + AI agent) | Everything above | — |
 
 ## Structure
@@ -22,7 +23,7 @@ ai-qa-portfolio/
 ├── tests/          data-driven test suites
 ├── utils/          shared helpers: judge-model wrapper, RAG chain wrapper, config
 ├── reports/         generated HTML evaluation reports
-├── projects/       one folder per portfolio project (P1-P5)
+├── projects/       one folder per portfolio project (P1-P6)
 ├── docs/           write-ups, including the final Test Strategy documents
 └── .github/workflows/   CI pipeline (added in the framework-design phase)
 ```

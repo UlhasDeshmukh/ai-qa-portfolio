@@ -1,0 +1,395 @@
+<title>AI-QA Exercises Companion</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#EDEFF1; --surface:#FFFFFF; --surface-2:#E3E7EA; --ink:#1B2430; --ink-dim:#57626C;
+  --border:#CBD1D6; --accent:#2F6F6B; --accent-soft:#DCEBE9; --accent-ink:#FFFFFF;
+  --pass:#2E7D4F; --pass-soft:#E2F0E7; --shadow: 0 1px 2px rgba(27,36,48,.06), 0 4px 14px rgba(27,36,48,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11151B; --surface:#1A222A; --surface-2:#212B34; --ink:#E8ECEE; --ink-dim:#93A0AB;
+    --border:#2B3742; --accent:#57B2AC; --accent-soft:#1E3230; --accent-ink:#0B1113;
+    --pass:#5CBE84; --pass-soft:#183024; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11151B; --surface:#1A222A; --surface-2:#212B34; --ink:#E8ECEE; --ink-dim:#93A0AB;
+  --border:#2B3742; --accent:#57B2AC; --accent-soft:#1E3230; --accent-ink:#0B1113;
+  --pass:#5CBE84; --pass-soft:#183024; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;}
+body{background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans','Segoe UI',system-ui,sans-serif; line-height:1.55;}
+.mono{font-family:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;}
+h1,h2,h3{text-wrap:balance; font-weight:700; margin:0;}
+p{margin:0 0 .6em; max-width:68ch;}
+.wrap{max-width:900px; margin:0 auto; padding:0 20px 80px;}
+a{color:var(--accent);}
+code{font-family:'IBM Plex Mono',monospace; background:var(--surface-2); padding:1px 5px; border-radius:4px; font-size:.92em;}
+
+.topbar{position:sticky; top:0; z-index:20; background:var(--bg); border-bottom:1px solid var(--border); backdrop-filter:blur(6px);}
+.topbar-inner{max-width:900px; margin:0 auto; padding:14px 20px; display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px;}
+.brand{display:flex; flex-direction:column; gap:2px; margin-right:auto;}
+.brand .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim);}
+.brand h1{font-size:19px;}
+.back-link{font-size:13px; font-family:'IBM Plex Mono',monospace; white-space:nowrap;}
+.stat{display:flex; flex-direction:column; align-items:flex-end;}
+.stat .n{font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:16px;}
+.stat .l{font-size:10.5px; color:var(--ink-dim); letter-spacing:.06em; text-transform:uppercase;}
+
+section{margin-top:44px; scroll-margin-top:70px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:10px;}
+.section-head .num{font-family:'IBM Plex Mono',monospace; color:var(--accent); background:var(--accent-soft); border-radius:6px; padding:2px 9px; font-size:13px; font-weight:600;}
+.section-head h2{font-size:21px;}
+
+.toc{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 20px; box-shadow:var(--shadow); margin-top:22px;}
+.toc h3{font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-dim); margin-bottom:10px;}
+.toc-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:6px 14px;}
+.toc-grid a{font-size:13.5px; text-decoration:none; display:flex; gap:6px; align-items:baseline;}
+.toc-grid a:hover{text-decoration:underline;}
+.toc-grid .tn{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-dim);}
+
+.ex-card{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:18px 22px; box-shadow:var(--shadow); margin-bottom:16px;}
+.ex-card h4{font-size:16px; margin-bottom:12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.ex-card h5{font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-dim); margin:16px 0 6px;}
+.ex-card h5:first-of-type{margin-top:4px;}
+.ex-card ol, .ex-card ul{margin:0; padding-left:20px;}
+.ex-card li{margin-bottom:5px;}
+.done-row{display:flex; align-items:center; gap:8px; margin-left:auto;}
+.done-row label{font-size:12.5px; color:var(--ink-dim); display:flex; gap:6px; align-items:center; cursor:pointer; font-weight:400;}
+.done-row input{accent-color:var(--pass); width:15px; height:15px;}
+.ex-card.done{border-color:var(--pass); background:var(--pass-soft);}
+.deliverable, .doneblock{background:var(--surface-2); border-radius:7px; padding:10px 14px; margin-top:10px; font-size:13.5px;}
+.deliverable b, .doneblock b{color:var(--ink);}
+
+footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--border); color:var(--ink-dim); font-size:12.5px;}
+</style>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="eyebrow">AI-QA · Companion</span>
+      <h1>Exercises</h1>
+    </div>
+    <a class="back-link" href="field-manual.html">&larr; Field Manual</a>
+    <div class="stat"><span class="n mono" id="doneStat">0/0</span><span class="l">Done</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+<p style="margin-top:22px; color:var(--ink-dim);">Every hands-on task from the Field Manual, expanded into a real step-by-step lab: setup, what to do, what to produce, and a "done when" checklist. Each module here mirrors the same number in the Field Manual — jump to yours from the index below, or from the link inside each module there.</p>
+
+<div class="toc">
+  <h3>Jump to module</h3>
+  <div class="toc-grid" id="tocGrid"></div>
+</div>
+
+<div id="exList"></div>
+
+<footer>Personal study tool · checkbox progress is saved only in this browser.</footer>
+</div>
+
+<script>
+const EXERCISES = [
+{m:1, title:"Intro to AI Testing & Mindset Shift", items:[
+ {id:"1-1", title:"Draw the AI Testing Lifecycle from memory",
+  setup:["Goal: lock in the traditional-vs-AI lifecycle shift using the graphical-memory method (draw, don't just read)."],
+  steps:[
+   "Without looking at the main module's diagram, take a blank page and draw the traditional lifecycle: Requirement → Test Case → Fixed Expected Output → Pass/Fail.",
+   "Below it, draw the AI system lifecycle: Requirement → Test Scenario → Quality Rubric → Score/Grade → Threshold Pass/Fail.",
+   "Check your drawing against the main module's version. Circle anything you got wrong or left out.",
+   "Write one sentence, in your own words, explaining why the rubric step had to be inserted."
+  ],
+  deliverable:"A photo/screenshot of your drawing saved to <code>notes/module1-lifecycle.png</code>, plus your one-sentence explanation.",
+  done:"You can redraw both lifecycles from memory a second time, with no mistakes, without looking anything up."},
+ {id:"1-2", title:"Classify four real products and open your Bug Board",
+  setup:["Goal: practice mapping real products onto chatbot/RAG-app/agent/copilot, and start the running Bug Board this whole course uses."],
+  steps:[
+   "Pick four AI products you've actually used or heard of at work. For each, write one line classifying it as chatbot / RAG app / agent / copilot — note if it's a combination.",
+   "For each, write one sentence on where you'd expect its risk to concentrate, based on this module's content.",
+   "Create (or open) your Bug Board — two columns, AI Bugs vs Traditional Bugs. Add the first entry: \"Hallucination\" (AI) vs \"Wrong calculation\" (Traditional)."
+  ],
+  deliverable:"<code>notes/module1-products.md</code> with your four classifications + reasoning, and your Bug Board started.",
+  done:"You can explain out loud, without notes, why a RAG app's failure mode differs from a plain chatbot's."}
+]},
+
+{m:2, title:"LLM Fundamentals Refresher for Testers", items:[
+ {id:"2-1", title:"Local vs. cloud model comparison",
+  setup:["Goal: turn the abstract cost/quality/latency tradeoff into something you've actually measured."],
+  steps:[
+   "Install LM Studio and download one small local model.",
+   "Get API access to one commercial model (OpenAI, Anthropic, or whichever you already have).",
+   "Write down 3 identical prompts to send to both: one factual, one reasoning/math, one open-ended \"explain this concept\".",
+   "Run all 3 against both models. For each of the 6 runs, record: full output, response time, and (for the commercial model) token counts and resulting cost.",
+   "Write a comparison table: prompt | model | quality (1-5) | latency | cost."
+  ],
+  deliverable:"<code>notes/module2-model-comparison.md</code> with your table and a 3-4 sentence conclusion on where the local model was \"good enough\" and where the gap mattered.",
+  done:"You can state, with a specific number, how much cheaper (or not) the local model was, backed by an actual output comparison, not a guess."},
+ {id:"2-2", title:"Break a prompt with temperature and sampling knobs",
+  setup:["Goal: feel the knob→failure map in your own hands, not just read about it."],
+  steps:[
+   "Pick one factual-recall prompt with a clear, checkable correct answer.",
+   "Run it 5 times at temperature 0. Note whether outputs are identical or nearly identical.",
+   "Run it 5 times at a high temperature (1.2-1.5). Note variation, and specifically look for any hallucinated detail not in the ground-truth version.",
+   "If exposed, run it once more at a very restrictive top-P (e.g. 0.1) and note if output becomes repetitive/narrow.",
+   "Write down which failure from the knob→failure table you personally reproduced."
+  ],
+  deliverable:"<code>notes/module2-sampling-experiment.md</code> with your 11 raw outputs (or a representative sample) and your conclusion.",
+  done:"You've personally witnessed at least one hallucination caused by high temperature, and can point to the specific fabricated detail."}
+]},
+
+{m:3, title:"Prompt Testing (with PromptFoo)", items:[
+ {id:"3-1", title:"Build a prompt regression suite in PromptFoo",
+  setup:[
+   "Install Node.js if needed, then <code>npx promptfoo@latest init</code> in a new folder inside <code>ai-qa-portfolio/projects/p4-redteam/</code>.",
+   "Get API access to at least one commercial provider; optionally add a local model via LM Studio as a third provider.",
+   "Write a short system prompt for a fictional support chatbot and save it as <code>prompts/support_agent.txt</code>."
+  ],
+  steps:[
+   "Write 5 test cases in promptfooconfig.yaml: 2 positive, 2 negative, 1 edge case, following the annotated example in the manual.",
+   "Give each test case at least one deterministic assertion (contains/not-contains/regex) AND one llm-rubric Model-Graded assertion.",
+   "Run <code>promptfoo eval</code> and open the generated HTML report (<code>promptfoo view</code>).",
+   "Deliberately reword your system prompt slightly (remove one constraint sentence) and rerun — note any test that now fails that passed before. That's your first real prompt regression.",
+   "Write one prompt-injection attempt: a fake \"retrieved document\" with hidden instructions, fed in as if it were retrieved content — see whether your prompt/model resists it."
+  ],
+  deliverable:"The promptfooconfig.yaml, the prompt template file, a screenshot/export of the eval report, and a note describing the regression from step 4 and the injection result from step 5.",
+  done:"You have a committed promptfooconfig.yaml with at least 5 test cases, both assertion types represented, and a documented regression + documented injection attempt."}
+]},
+
+{m:4, title:"RAG Architecture & RAG Testing", items:[
+ {id:"4-1", title:"Build and deliberately break a RAG chain",
+  setup:[
+   "Pick a small, real document set you understand well (5-15 short docs).",
+   "Choose a RAG framework (LangChain is the common default; any framework giving visibility into retrieved chunks works).",
+   "Set up an embedding model and a local vector store (Chroma or FAISS is fine)."
+  ],
+  steps:[
+   "Build a simple RAG chain: chunk, embed, index, and wire up retrieval + generation so you can see both retrieved chunks and the final answer.",
+   "Ask 3 questions your docs clearly cover; confirm retrieval + answer both look right. Log retrieved chunks for each.",
+   "Break it on purpose, three ways: shrink chunk size drastically and re-ask; ask a question the docs don't cover at all; find/construct two conflicting chunks and ask a question either could answer.",
+   "For at least one covered question, manually inspect retrieved chunks — is there a \"high similarity, wrong chunk\" case like the manual's worked example?"
+  ],
+  deliverable:"Working RAG chain code committed to <code>ai-qa-portfolio/projects/p1-rag-testing/</code>, plus a log documenting each break-it test and your step 4 finding.",
+  done:"You can point to at least one real, observed instance of retrieval returning a topically-similar-but-wrong chunk, and have written down what you'd change to fix it."}
+]},
+
+{m:5, title:"AI Evaluation Metrics & Manual AI Testing", items:[
+ {id:"5-1", title:"Build a 10-question golden dataset",
+  setup:["Pick one real or realistic feature from your P1/P3 project.", "Create <code>datasets/golden_v1.jsonl</code> in your portfolio repo."],
+  steps:[
+   "Write 10 questions across three difficulty bands: 4 easy, 3 medium (combine two facts), 3 hard (edge cases/ambiguous phrasing).",
+   "For each, write a human \"ideal\" reference answer yourself — don't paste from a model.",
+   "Store each row as {question, ideal_answer, difficulty}."
+  ],
+  deliverable:"<code>datasets/golden_v1.jsonl</code> with 10 rows.",
+  done:"Every row has a question, human-written ideal answer, and difficulty tag — a colleague could understand \"correct\" for each row with zero extra context."},
+ {id:"5-2", title:"Human vs. LLM-as-Judge grading, with proper validation",
+  setup:["Run your system against all 10 golden questions, capturing actual output.", "Write your rubric (from the manual, or your own 3-4 criterion version) into <code>metrics/rubric.md</code>."],
+  steps:[
+   "Grade all 10 outputs yourself, by hand, against the rubric. Record scores in a table.",
+   "Build an LLM-as-Judge call using the same rubric and question/answer pairs. Run it on all 10.",
+   "Compare pass/fail match with your own scoring; compute raw agreement %.",
+   "Identify \"should fail\" cases (deliberately corrupt 2-3 answers if none exist naturally) and compute the judge's true-positive and true-negative rate separately."
+  ],
+  deliverable:"<code>docs/judge-validation.md</code> with your comparison table, raw agreement %, TPR/TNR, and 2-3 sentences on where the judge disagreed and your hypothesis why.",
+  done:"You can state, in one sentence, whether you'd trust this judge configuration in production — backed by TPR/TNR, not the raw agreement number."}
+]},
+
+{m:6, title:"AI Test Case Design & Error Analysis", items:[
+ {id:"6-1", title:"Write test cases at all three success-criteria levels",
+  setup:["Take one agentic scenario from your P3 project (or the calculator-agent word-problem example)."],
+  steps:[
+   "Write one test case checking outcome level only (did the final answer match).",
+   "Write one test case checking trajectory level (was the sequence of tool calls reasonable).",
+   "Write one test case checking step level (was a single specific tool call's arguments correct in isolation).",
+   "Construct one failing run for each level and confirm each test catches its intended failure without also flagging the other two."
+  ],
+  deliverable:"<code>tests/success_criteria_levels.md</code> with the three test cases and three deliberately-broken runs, plus which test caught which.",
+  done:"You can show one broken run that fails your trajectory-level test but passes step-level and outcome-level (i.e. you've actually separated the levels)."},
+ {id:"6-2", title:"Run a real open & axial coding pass",
+  setup:["Gather 15-20 transcripts from your P1 or P3 project (real, or synthetic via deliberately varied/edge-case inputs).", "Create a tracking table in <code>notes/error-analysis.md</code>: transcript_id | what happened | open code | axial category."],
+  steps:[
+   "Read each transcript once, filling in only \"what happened\" and \"open code\" — a short free-form phrase per transcript. Do not invent categories yet.",
+   "Once all are open-coded, step back and cluster your open codes into 4-7 named axial categories (a failure taxonomy).",
+   "For each axial category, note which Module 5 metric (if any) would have caught it automatically, and which would need a manual/LLM-judge check."
+  ],
+  deliverable:"The completed tracking table plus a written failure taxonomy (4-7 named categories with a one-line definition each).",
+  done:"Every transcript was open-coded before any category existed, and every final axial category points back to at least one specific real transcript that justifies its existence."}
+]},
+
+{m:7, title:"Agentic Workflows & Tool-Use Testing", items:[
+ {id:"7-1", title:"Build and break a calculator-tool agent across all 4 pyramid layers",
+  setup:["Pick any lightweight agent framework (or a minimal hand-rolled ReAct loop) and define one tool: <code>calculate(expression: str) -> float</code>.", "Write 5 word problems requiring 1-2 arithmetic steps each."],
+  steps:[
+   "Tool-level test: unit-test calculate() directly with 5-10 expressions (including edge cases like division by zero) — no LLM involved.",
+   "Tool-calling test: for each word problem, verify the model calls calculate (not skips it or calls a nonexistent tool) with a valid expression.",
+   "Workflow/orchestration test: for the two-step problem, verify the model calls the tool twice in the correct order.",
+   "End-to-end test: verify the final numeric answer is correct for all 5 problems.",
+   "Deliberately break it: rename the tool's expression parameter in the schema without telling the model. Re-run all 5 and note at which layer the failure first surfaces."
+  ],
+  deliverable:"A table (problem | tool-level | tool-calling | workflow | e2e pass/fail) for both the working and broken versions.",
+  done:"You have results for all 4 layers on 5 problems, plus the broken-schema experiment showing which layer caught the injected bug first."},
+ {id:"7-2", title:"Diagnose a stuck tool loop from a trace",
+  setup:["Take the worked stuck-loop example from the manual (or produce your own by giving your agent a tool that always errors)."],
+  steps:[
+   "Write a one-paragraph diagnosis: which Thought/Action/Observation exactly repeats, and why the agent's belief never updates.",
+   "Propose two independent fixes: one to the tool's error message, one to the agent's instructions.",
+   "If possible, implement the tool-error-message fix and re-run — confirm the agent now behaves differently instead of looping."
+  ],
+  deliverable:"A written diagnosis, two proposed fixes, and (if implementable) evidence the fix changed the agent's behavior.",
+  done:"You have a written diagnosis, two proposed fixes, and ideally evidence of a behavior change."}
+]},
+
+{m:8, title:"AI Safety, Bias & Red Teaming", items:[
+ {id:"8-1", title:"Configure and run a PromptFoo red-team pass at Small scope",
+  setup:["Install PromptFoo if needed.", "Point it at your Module 3/4/7 test application (or a stub).", "In promptfooconfig.yaml, add a redteam section: purpose, features, and system rules (e.g. never reveal other customers' data, never process refunds over $50 without confirmation)."],
+  steps:[
+   "Run the red-team generation/execution at Small scope (check current PromptFoo docs for the exact flag/config, since CLI syntax changes between versions).",
+   "For every finding, fill out the Module 6 AI bug report template: title, exact repro steps, expected vs actual, OWASP category, severity.",
+   "Note which findings your existing guardrails already caught, and which slipped through."
+  ],
+  deliverable:"A triage log of every finding using the bug report template, plus a one-paragraph summary of your biggest gap.",
+  done:"You have at least one completed Small red-team run with every finding triaged and categorized against an OWASP LLM Top 10 entry."},
+ {id:"8-2", title:"Design a risk-tiering table for your own test application",
+  setup:["List every distinct action your test agent/chatbot can take that changes state or has real-world consequence."],
+  steps:[
+   "For each action, assign a tier (autonomous / post-hoc logged / human-approval-required) using the manual's worked table as a template.",
+   "Justify each tier assignment in one sentence (blast radius, reversibility).",
+   "Pick the action tiered \"human-approval-required\" and write acceptance criteria for a test verifying the approval gate actually blocks execution until approval is granted."
+  ],
+  deliverable:"A complete risk-tiering table plus one written test case for the approval-gate behavior.",
+  done:"You have a complete table and one written approval-gate test case."}
+]},
+
+{m:9, title:"DeepEval Framework Deep-Dive", items:[
+ {id:"9-1", title:"Install DeepEval and run your first graded test",
+  setup:["In <code>ai-qa-portfolio/projects/p5-framework</code>, create a virtual environment and <code>pip install deepeval</code>.", "Set your judge-model API key as an environment variable."],
+  steps:[
+   "Create <code>tests/test_first_case.py</code> and adapt the manual's test_refund_policy_answer example to one real question/answer/context triple from your own P1 project.",
+   "Run it: <code>deepeval test run tests/test_first_case.py --output-dir reports/</code>.",
+   "Open the generated HTML report and note the per-metric score for FaithfulnessMetric and AnswerRelevancyMetric."
+  ],
+  deliverable:"One passing DeepEval test case and a generated HTML report.",
+  done:"You have a passing test, an open report, and can explain what would need to change in actual_output to make FaithfulnessMetric fail."},
+ {id:"9-2", title:"Reimplement your Module 4 and Module 5 hands-on as real DeepEval tests",
+  setup:["Have your P1 RAG chain and P2 golden dataset ready."],
+  steps:[
+   "For at least 5 P1 test questions, capture input/actual_output/retrieval_context as LLMTestCase objects.",
+   "For at least 5 P2 golden questions, capture input/actual_output/expected_output.",
+   "Write DeepEval test files for both sets — FaithfulnessMetric + AnswerRelevancyMetric for RAG, a custom or built-in judge metric for the golden-dataset cases.",
+   "Run the full suite and generate one combined HTML report.",
+   "Deliberately break one case (e.g. shrink a chunk) and confirm the report shows the failure with a low faithfulness score, not just a generic failure."
+  ],
+  deliverable:"A tests/ folder with at least two real DeepEval test files covering both P1 and P2, a report showing at least one intentional, diagnosable failure.",
+  done:"Passing/failing counts match what you expected before running it."}
+]},
+
+{m:10, title:"AI Testing Framework Design & CI/CD", items:[
+ {id:"10-1", title:"Scaffold the framework folder structure",
+  setup:["In ai-qa-portfolio, ensure datasets/, metrics/, tests/, utils/, reports/, .github/workflows/ exist."],
+  steps:[
+   "Move your Module 9 golden dataset content into datasets/ as a JSONL file.",
+   "Write one reusable utility in utils/ — a load_dataset(path) function that reads your JSONL and yields LLMTestCase objects.",
+   "Refactor at least one Module 9 test file to use load_dataset and @pytest.mark.parametrize instead of hardcoded cases."
+  ],
+  deliverable:"A refactored, parametrized test file plus the load_dataset utility.",
+  done:"Adding a new test case is a one-line addition to your JSONL file, with zero new Python code required, and the parametrized test still passes."},
+ {id:"10-2", title:"Wire up GitHub Actions",
+  setup:["Have your P5 framework repo ready."],
+  steps:[
+   "Create .github/workflows/eval-suite.yml using the manual's workflow example, adapted to your repo's test paths and Python version.",
+   "Add your judge-model API key to the repo's GitHub Actions secrets — never commit it.",
+   "Push a small, deliberate prompt/dataset change and open a pull request.",
+   "Confirm the workflow runs automatically and the HTML report is downloadable as a build artifact.",
+   "Write one capability test and one regression test into the suite, labeled clearly (e.g. test_capability_ / test_regression_ filename prefixes)."
+  ],
+  deliverable:"A working CI workflow, plus one clearly-labeled capability test and one regression test.",
+  done:"A PR you open triggers the workflow automatically, the report is downloadable from the PR's Actions tab, and you can explain the capability-vs-regression difference out loud."}
+]},
+
+{m:11, title:"Production Reliability & Release Engineering", items:[
+ {id:"11-1", title:"Design a canary rollout + rollback plan",
+  setup:["Pick your P1 (RAG) or P3 (agent) project as the service being rolled out.", "Have the manual's 5-gate table and rollback-speed discussion handy."],
+  steps:[
+   "Define the canary progression you'd use (e.g. 1% → 10% → 25% → 50% → 75% → 100%) and how long you'd hold at each stage before advancing.",
+   "For each of the 5 gates (latency percentiles, cost/request, error/refusal rate, output-length distribution, user-feedback rate), write a concrete numeric threshold and how you'd measure it for your project.",
+   "Set your gate thresholds above your own project's observed run-to-run variance (its \"noise floor\") — measure that variance first by running the same input 5-10 times and noting the spread.",
+   "Design the rollback mechanism: it must be a policy/config flip, not a redeploy. Write exactly what flips and where it lives.",
+   "Write one shadow-mode check you'd run before the canary even starts (zero user impact), and name one thing shadow mode would NOT catch that the canary would."
+  ],
+  deliverable:"<code>docs/rollout-runbook.md</code> with the progression, 5 gate thresholds + measurement method, your measured noise floor, and the rollback mechanism.",
+  done:"You can explain, for each gate, what number would make you halt the rollout, and your rollback step takes seconds on paper, not a redeploy."},
+ {id:"11-2", title:"Reproduce the prompt-uniformity load-testing trap",
+  setup:["Reuse your Module 2 local-or-API model setup.", "Prepare two prompt sets: Set A = the exact same prompt repeated 10 times; Set B = 10 different prompts varying meaningfully in length and content."],
+  steps:[
+   "Run Set A (identical prompt x10) against your model, recording response time for each.",
+   "Run Set B (varied prompts x10) against the same model, recording response time for each.",
+   "Compare the two distributions: report P50 and P90 (not just mean) for each set.",
+   "Explain in writing why Set A likely looks artificially fast/consistent compared to Set B, connecting it to prefix-caching and the prompt-uniformity trap from the lesson.",
+   "State, in your own words, which set is the honest representation of real user traffic and why."
+  ],
+  deliverable:"<code>notes/module11-load-test.md</code> with both raw timing sets, P50/P90 for each, and your written explanation.",
+  done:"You can show a measurable gap between Set A and Set B's latency distribution and correctly attribute it to the uniformity trap, not random noise."}
+]},
+
+{m:12, title:"Capstone — Test Strategy Documents", items:[
+ {id:"cap-1", title:"Draft both Test Strategy documents",
+  setup:["Have P1-P6 in a reasonably complete state."],
+  steps:[
+   "Outline first: for each document (chatbot, agent), write just the section headers (scope, metrics & why, golden dataset strategy, regression strategy, safety/red-team plan, CI/CD & reporting, production observability & release engineering) before writing any prose.",
+   "Fill each section with 2-4 sentences of real content, immediately followed by a citation to a specific P1-P6 artifact — if you can't cite something, that's a signal to go build the missing evidence.",
+   "Chatbot-specific pass: tie the metrics section back to P1/P2, the safety section back to P4's red-team findings, and the release-engineering section back to P6's canary/rollback plan.",
+   "Agent-specific pass: restructure the regression/CI section around the AI-Native Test Pyramid, citing P3, and add risk-tiered human-in-the-loop design to the safety section.",
+   "Final review: read both aloud. Mark anything you haven't actually built yet as \"planned, not yet implemented\" rather than overclaiming."
+  ],
+  deliverable:"Both documents committed to <code>ai-qa-portfolio/docs/</code> (test-strategy-chatbot.md, test-strategy-agent.md).",
+  done:"Every major section cites at least one real P1-P6 artifact, and you could hand either document to a colleague and have them understand exactly what is and isn't currently tested."}
+]},
+];
+
+const listEl = document.getElementById("exList");
+const tocEl = document.getElementById("tocGrid");
+let totalItems = 0;
+
+EXERCISES.forEach(mod=>{
+  tocEl.innerHTML += `<a href="#mod-${mod.m}"><span class="tn">M${mod.m}</span>${mod.title}</a>`;
+  const sec = document.createElement("section");
+  sec.id = "mod-"+mod.m;
+  let cardsHTML = "";
+  mod.items.forEach(it=>{
+    totalItems++;
+    cardsHTML += `
+    <div class="ex-card" id="card-${it.id}">
+      <h4>${it.title}
+        <span class="done-row"><label><input type="checkbox" class="done-cb" data-id="${it.id}"> Mark done</label></span>
+      </h4>
+      ${it.setup ? `<h5>Setup</h5><ul>${it.setup.map(s=>`<li>${s}</li>`).join("")}</ul>` : ""}
+      <h5>Do</h5><ol>${it.steps.map(s=>`<li>${s}</li>`).join("")}</ol>
+      <div class="deliverable"><b>Deliverable:</b> ${it.deliverable}</div>
+      <div class="doneblock"><b>Done when:</b> ${it.done}</div>
+    </div>`;
+  });
+  sec.innerHTML = `<div class="section-head"><span class="num">M${mod.m}</span><h2>${mod.title}</h2></div>${cardsHTML}`;
+  listEl.appendChild(sec);
+});
+
+document.getElementById("doneStat").textContent = "0/"+totalItems;
+
+function updateDoneStat(){
+  let done = 0;
+  document.querySelectorAll(".done-cb").forEach(cb=>{ if(cb.checked) done++; });
+  document.getElementById("doneStat").textContent = done+"/"+totalItems;
+}
+document.querySelectorAll(".done-cb").forEach(cb=>{
+  const key = "aiqa-ex-"+cb.dataset.id;
+  try{ cb.checked = localStorage.getItem(key) === "1"; }catch(err){}
+  const card = document.getElementById("card-"+cb.dataset.id);
+  if(cb.checked && card) card.classList.add("done");
+  cb.addEventListener("change", ()=>{
+    try{ localStorage.setItem(key, cb.checked ? "1":"0"); }catch(err){}
+    if(card) card.classList.toggle("done", cb.checked);
+    updateDoneStat();
+  });
+});
+updateDoneStat();
+</script>

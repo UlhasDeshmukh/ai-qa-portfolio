@@ -1,6 +1,13 @@
 # AI-QA Portfolio
 
-Hands-on projects built while transitioning from QA/test-automation into AI evaluation engineering. Each project maps to a module in my [AI-QA Field Manual](../AI-QA/AI-QA-Master-Study-Plan.md) study plan and builds toward being able to write a real **Test Strategy** for a chatbot or an AI agent product.
+Hands-on projects built while transitioning from QA/test-automation into AI evaluation engineering. Each project maps to a module in the study plan below and builds toward being able to write a real **Test Strategy** for a chatbot or an AI agent product.
+
+## Study plan
+
+The full course lives in [`study-plan/`](study-plan) — a self-contained, offline copy that works on any machine with just `git clone` (no Claude account needed):
+- [`study-plan/field-manual.html`](study-plan/field-manual.html) — open directly in a browser: lessons, diagrams, quizzes.
+- [`study-plan/exercises.html`](study-plan/exercises.html) — step-by-step hands-on labs for every module.
+- [`study-plan/AI-QA-Master-Study-Plan.md`](study-plan/AI-QA-Master-Study-Plan.md) — the same content as plain Markdown.
 
 ## Projects
 
